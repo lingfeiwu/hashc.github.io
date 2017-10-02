@@ -1,0 +1,756 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="APS,数据处理," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="1.预处理 html转义 对一些明显的错写词纠正 对符号进行标准处理:把”(“,”)”,”^”,”†”,”/“,”*”,”@”,”‡”,”§”,”‖”,”;”统一转化为”,”，同时， 带有语调字符的转义  共有354, 534条不重复地址记录 2.地址分割与匹配分割方式：按照国家分割 国家：数据来源于ISO-2国家标准编码，同时，把诸如”CZECHOSLOVAKIA”，”USSR”，”YUGOSL">
+<meta name="keywords" content="APS,数据处理">
+<meta property="og:type" content="article">
+<meta property="og:title" content="APS地址数据整理">
+<meta property="og:url" content="http://yoursite.com/2017/03/28/APS地址数据整理/index.html">
+<meta property="og:site_name" content="Choi&#39;s Blog">
+<meta property="og:description" content="1.预处理 html转义 对一些明显的错写词纠正 对符号进行标准处理:把”(“,”)”,”^”,”†”,”/“,”*”,”@”,”‡”,”§”,”‖”,”;”统一转化为”,”，同时， 带有语调字符的转义  共有354, 534条不重复地址记录 2.地址分割与匹配分割方式：按照国家分割 国家：数据来源于ISO-2国家标准编码，同时，把诸如”CZECHOSLOVAKIA”，”USSR”，”YUGOSL">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://imglf2.nosdn.127.net/img/Q20zbTVFMnRqRVc2RURicDJnZXpPN0xjY2VVTjcvckE5aGdUeTlwUFZwaENlNEJDTFdFcnR3PT0.png?imageView&thumbnail=500x0&quality=96&stripmeta=0&type=jpg">
+<meta property="og:image" content="http://imglf0.nosdn.127.net/img/Q20zbTVFMnRqRVc2RURicDJnZXpPNmRKSTd2Sm1XOTl1YUdxNmk5SEU3ejU4a1Myci9EVlp3PT0.png?imageView&thumbnail=1680x0&quality=96&stripmeta=0&type=jpg">
+<meta property="og:image" content="http://imglf2.nosdn.127.net/img/Q20zbTVFMnRqRVg2ZmtMREVkNXZpSWEyOG9SWlUrd3dYZ0hsNW1qUXB6ZGhTcFpEZnBpc0V3PT0.png?imageView&thumbnail=1680x0&quality=96&stripmeta=0&type=jpg">
+<meta property="og:image" content="http://imglf0.nosdn.127.net/img/Q20zbTVFMnRqRVVVbTNBa0Znc3BSTFpsUGppSlA3bWxEV3lnQ0IxSGg2S3dsK1NWNUNsR1B3PT0.png?imageView&thumbnail=1680x0&quality=96&stripmeta=0&type=jpg">
+<meta property="og:image" content="http://imglf2.nosdn.127.net/img/Q20zbTVFMnRqRVVVbTNBa0Znc3BSQ0FqcFpDaThzK3R5UGRZUERvMm1SMGFYSWE4Y011REdRPT0.png?imageView&thumbnail=1680x0&quality=96&stripmeta=0&type=jpg">
+<meta property="og:updated_time" content="2017-10-02T06:05:27.983Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="APS地址数据整理">
+<meta name="twitter:description" content="1.预处理 html转义 对一些明显的错写词纠正 对符号进行标准处理:把”(“,”)”,”^”,”†”,”/“,”*”,”@”,”‡”,”§”,”‖”,”;”统一转化为”,”，同时， 带有语调字符的转义  共有354, 534条不重复地址记录 2.地址分割与匹配分割方式：按照国家分割 国家：数据来源于ISO-2国家标准编码，同时，把诸如”CZECHOSLOVAKIA”，”USSR”，”YUGOSL">
+<meta name="twitter:image" content="http://imglf2.nosdn.127.net/img/Q20zbTVFMnRqRVc2RURicDJnZXpPN0xjY2VVTjcvckE5aGdUeTlwUFZwaENlNEJDTFdFcnR3PT0.png?imageView&thumbnail=500x0&quality=96&stripmeta=0&type=jpg">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/03/28/APS地址数据整理/"/>
+
+
+  <title> APS地址数据整理 | Choi's Blog </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta custom-logo">
+  
+    <div class="site-meta-headline">
+      <a>
+        <img class="custom-logo-image" src="/images/avatar.png"
+             alt="Choi's Blog"/>
+      </a>
+    </div>
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Choi's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">Don't expect to get care from others if you want to be stronger</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-schedule">
+          <a href="/schedule" rel="section">
+            
+            日程
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                APS地址数据整理
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-03-28T09:21:20+08:00" content="2017-03-28">
+              2017-03-28
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/03/28/APS地址数据整理/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/28/APS地址数据整理/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="1-预处理"><a href="#1-预处理" class="headerlink" title="1.预处理"></a>1.预处理</h1><ul>
+<li>html转义</li>
+<li>对一些明显的错写词纠正</li>
+<li>对符号进行标准处理:把”(“,”)”,”^”,”†”,”/“,”*”,”@”,”‡”,”§”,”‖”,”;”统一转化为”,”，同时，</li>
+<li>带有语调字符的转义</li>
+</ul>
+<p>共有354, 534条不重复地址记录</p>
+<h1 id="2-地址分割与匹配"><a href="#2-地址分割与匹配" class="headerlink" title="2.地址分割与匹配"></a>2.地址分割与匹配</h1><h2 id="分割方式：按照国家分割"><a href="#分割方式：按照国家分割" class="headerlink" title="分割方式：按照国家分割"></a>分割方式：按照国家分割</h2><ul>
+<li>国家：数据来源于ISO-2国家标准编码，同时，把诸如”CZECHOSLOVAKIA”，”USSR”，”YUGOSLAVIA”，”korea”先单独作为一个独立国家，同时，有一些国家有多个名字，收集这些名字的变种，统一标识。<br><img src="http://imglf2.nosdn.127.net/img/Q20zbTVFMnRqRVc2RURicDJnZXpPN0xjY2VVTjcvckE5aGdUeTlwUFZwaENlNEJDTFdFcnR3PT0.png?imageView&amp;thumbnail=500x0&amp;quality=96&amp;stripmeta=0&amp;type=jpg" alt=""></li>
+<li>美国各州，先作为“国家”进行匹配，若没有找到，再去找“USA”或者“United States”</li>
+<li>加拿大各州，同上</li>
+<li>匹配：按照,分割出CommaString，对每个CommaString逐个匹配，记录下每次匹配的位置，判断是否在“Universit”，“Universitat”,”labrotory”等机构词汇附近，如果在其附近并且二者之间没有“and”且距离没有超过3个空格，认定匹配失败，记录下匹配成功的国家名，<br>如果遇到同一地址字符出现多个国家名的情况<br><img src="http://imglf0.nosdn.127.net/img/Q20zbTVFMnRqRVc2RURicDJnZXpPNmRKSTd2Sm1XOTl1YUdxNmk5SEU3ejU4a1Myci9EVlp3PT0.png?imageView&amp;thumbnail=1680x0&amp;quality=96&amp;stripmeta=0&amp;type=jpg" alt=""><br>则判断两个国家名之间是否存在” AND “这种情况，有的话默认保留前者</li>
+<li>对整个地址按照国家进行分割</li>
+</ul>
+<p>结果，有2，564个地址没有找到国家名，这些地址都没有国家名，比如<br>DEPARTMENT OF PHYSICS, FUDAN UNIVERSITY, SHANGHAI, PEOPLE’S REPUBLIC OF<br>SCOTTISH UNIVERSITIES PHYSICS ALLIANCE (SUPA)<br>DIPARTIMENTO DI FISICA, UNIVERSITA DI MILANO<br>RESEARCH CENTER FOR THE EARLY UNIVERSE (RESCEU), GRADUATE SCHOOL OF SCIENCE, UNIVERSITY OF TOKYO, 7-3-1, HONGO, BUNKYO-KU 113-0033, TOKYO<br>DEPARTMENT OF PHYSICS, UNIVERSITY OF PRETORIA, PRETORIA, REPUBLIC OF<br>INSTITUTE OF EXPERIMENTAL AND THEORETICAL PHYSICS, MOSCOW<br>主要是只写城市名，或者州名写错“ILLINOI S”，或者没有城市名，甚至没有任何地址信息包含在内</p>
+<p>如果有国家-省-城市的三级列表，就可以按照处理美国各州的方式进行处理了</p>
+<p>这种处理通过了机构的检验，方法是，如果有机构列表里的机构出现在该地址中，统计国家正确的数量</p>
+<p><img src="http://imglf2.nosdn.127.net/img/Q20zbTVFMnRqRVg2ZmtMREVkNXZpSWEyOG9SWlUrd3dYZ0hsNW1qUXB6ZGhTcFpEZnBpc0V3PT0.png?imageView&amp;thumbnail=1680x0&amp;quality=96&amp;stripmeta=0&amp;type=jpg" alt=""></p>
+<h2 id="寻找城市"><a href="#寻找城市" class="headerlink" title="寻找城市"></a>寻找城市</h2><ul>
+<li>按照分割后的子字符串搜搜城市，如果一个字符串中出现多个城市，并且二者距离很近，默认取后一个。这个主要是我们的城市列表包括了大量的乡镇导致的。</li>
+<li>在城市的数据库中大量类似“New”,”Hill”的单词 ，我们直接忽略这些地理名，人工处理</li>
+<li>大致按照处理国家的方式进行处理。</li>
+</ul>
+<p>检验，有9,031个地址没有找到城市，同样的，机构检验结果与国家检验相同，有一部分是不包含城市名，只有学校地址。</p>
+<p>随机挑选了1000条结果进行比对，结果有29条错误，国家匹配正确，但城市匹配中会有多个城市名，因为默认去后者 </p>
+<p>总共识别出来1,137,646</p>
+<h1 id="利用机构信息交叉检验"><a href="#利用机构信息交叉检验" class="headerlink" title="利用机构信息交叉检验"></a>利用机构信息交叉检验</h1><p>机构数据来源：<a href="https://www.grid.ac" target="_blank" rel="external">https://www.grid.ac</a></p>
+<p>第一次识别，处理完成725,568条记录，这些在之前用城市数据处理中的有732,359条</p>
+<p>第二次识别，处理完成59,221条记录,这些在之前用城市数据处理中的有49,987条</p>
+<p>剩下435,704条记录待识别。</p>
+<p>总共机构识别出784,789条，在城市数据对应的有782346条（1,137,646）</p>
+<p>其中二者识别出来的地址不相同的有133,234，可能的原因是，</p>
+<ul>
+<li>多地址，其中因为多地址问题出现问题的有39,662</li>
+<li>其他</li>
+</ul>
+<h1 id="城市聚类问题："><a href="#城市聚类问题：" class="headerlink" title="城市聚类问题："></a>城市聚类问题：</h1><p>method=’complete’ assigns：<br>$$<br>d(u,v)=max(dist(u_i,v_j))<br>$$<br>​                            for all points i $\in$ cluster u and j $\in$ cluster v. </p>
+<p>This is also known by the Farthest Point Algorithm or Voor Hees Algorithm.</p>
+<p>这样可以避免同一类里出现两个点距离过大的情况</p>
+<h1 id="第二次处理"><a href="#第二次处理" class="headerlink" title="第二次处理"></a>第二次处理</h1><p>根据mapfill单地址数据得到的城市数据集（主要是gps数据和城市数据分得很详细），根据上一次的结果匹配得到相应的城市</p>
+<h1 id="基于HEM的投入产出方法"><a href="#基于HEM的投入产出方法" class="headerlink" title="基于HEM的投入产出方法"></a>基于HEM的投入产出方法</h1><h3 id="1-HEM："><a href="#1-HEM：" class="headerlink" title="1. HEM："></a>1. HEM：</h3><ul>
+<li>如何衡量一个系统S里某个元素E的重要程度？</li>
+<li>去掉它E，看看系统S有什么变化？如果S变化很大，则说明它很重要</li>
+<li>那么，如何度量系统S变化？</li>
+</ul>
+<h3 id="2-投入产出方法："><a href="#2-投入产出方法：" class="headerlink" title="2.投入产出方法："></a>2.投入产出方法：</h3><p>借用经济领域中投入产出方法，投入产出系数矩阵B的最大正特征值$\lambda$被称为系统的生产效率系数。那么如果我们去掉B矩阵的第i行第j列，得到$B^{(-i)}$,求得$B^{(-i)}$的最大正特征值$\lambda^{(-i)}$,比较$|\lambda^{(-i)}-\lambda|$</p>
+<p>注：由Perron–Frobenius定理，我们这里的非负矩阵最大特征值总为正数</p>
+<h3 id="3-引文网络的投入产出矩阵："><a href="#3-引文网络的投入产出矩阵：" class="headerlink" title="3.引文网络的投入产出矩阵："></a>3.引文网络的投入产出矩阵：</h3><ul>
+<li>用$c_{ij}$表示i引用j的数量</li>
+<li>$C<em>{j}=\sum c</em>{ij}$</li>
+<li>$B<em>{ij}= \frac{\sum c</em>{ij}}{C_j}$</li>
+</ul>
+<p>然后得到如下的结果</p>
+<p><img src="http://imglf0.nosdn.127.net/img/Q20zbTVFMnRqRVVVbTNBa0Znc3BSTFpsUGppSlA3bWxEV3lnQ0IxSGg2S3dsK1NWNUNsR1B3PT0.png?imageView&amp;thumbnail=1680x0&amp;quality=96&amp;stripmeta=0&amp;type=jpg" alt=""></p>
+<p><img src="http://imglf2.nosdn.127.net/img/Q20zbTVFMnRqRVVVbTNBa0Znc3BSQ0FqcFpDaThzK3R5UGRZUERvMm1SMGFYSWE4Y011REdRPT0.png?imageView&amp;thumbnail=1680x0&amp;quality=96&amp;stripmeta=0&amp;type=jpg" alt=""></p>
+<p>93-13年得到的排名，基本相差不多</p>
+<p>把所有年份都集中到一起来看的话，Newark, NJ, USA这个城市的pagerank 与iof 上的差异比较大</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">all</th>
+<th>93-13</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Boston, MA, USA</td>
+<td>Boston, MA, USA</td>
+</tr>
+<tr>
+<td style="text-align:left">Newark, NJ, USA</td>
+<td>Paris, France</td>
+</tr>
+<tr>
+<td style="text-align:left">Stanford, CA, USA</td>
+<td>Tokyo, Japan</td>
+</tr>
+<tr>
+<td style="text-align:left">Chicago, IL, USA</td>
+<td>Stanford, CA, USA</td>
+</tr>
+<tr>
+<td style="text-align:left">Berkeley, CA, USA</td>
+<td>Chicago, IL, USA</td>
+</tr>
+<tr>
+<td style="text-align:left">Piscataway, NJ, USA</td>
+<td>Washington, DC, USA</td>
+</tr>
+<tr>
+<td style="text-align:left">Washington, DC, USA</td>
+<td>Newark, NJ, USA</td>
+</tr>
+<tr>
+<td style="text-align:left">Stony Brook, NY, USA</td>
+<td>San Francisco, CA, USA</td>
+</tr>
+<tr>
+<td style="text-align:left">Paris, France</td>
+<td>Stony Brook, NY, USA</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+</tr>
+</tbody>
+</table>
+<p>由于机构数据的识别率不高，无法用机构来做相关的工作</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/APS/" rel="tag">#APS</a>
+          
+            <a href="/tags/数据处理/" rel="tag">#数据处理</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/03/22/grid机构数据集说明/" rel="next" title="grid机构数据集说明">
+                <i class="fa fa-chevron-left"></i> grid机构数据集说明
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/03/31/编辑距离/" rel="prev" title="编辑距离">
+                编辑距离 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2017/03/28/APS地址数据整理/"
+           data-title="APS地址数据整理" data-url="http://yoursite.com/2017/03/28/APS地址数据整理/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="简兮" />
+          <p class="site-author-name" itemprop="name">简兮</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">27</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">20</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-预处理"><span class="nav-number">1.</span> <span class="nav-text">1.预处理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-地址分割与匹配"><span class="nav-number">2.</span> <span class="nav-text">2.地址分割与匹配</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#分割方式：按照国家分割"><span class="nav-number">2.1.</span> <span class="nav-text">分割方式：按照国家分割</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#寻找城市"><span class="nav-number">2.2.</span> <span class="nav-text">寻找城市</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#利用机构信息交叉检验"><span class="nav-number">3.</span> <span class="nav-text">利用机构信息交叉检验</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#城市聚类问题："><span class="nav-number">4.</span> <span class="nav-text">城市聚类问题：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第二次处理"><span class="nav-number">5.</span> <span class="nav-text">第二次处理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#基于HEM的投入产出方法"><span class="nav-number">6.</span> <span class="nav-text">基于HEM的投入产出方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-HEM："><span class="nav-number">6.0.1.</span> <span class="nav-text">1. HEM：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-投入产出方法："><span class="nav-number">6.0.2.</span> <span class="nav-text">2.投入产出方法：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-引文网络的投入产出矩阵："><span class="nav-number">6.0.3.</span> <span class="nav-text">3.引文网络的投入产出矩阵：</span></a></li></ol></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  Mon Oct 31 2016 08:00:00 GMT+0800 (DST) - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">简兮</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"hashc"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for (i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+  <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+  
+
+  
+
+  
+
+
+</body>
+</html>

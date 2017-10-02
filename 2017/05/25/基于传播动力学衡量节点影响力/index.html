@@ -1,0 +1,690 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="复杂网络," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="基于网络动力学的传播影响力排序 已有方法： Degree betweenness closeness eigenvector centrality k-shell coreness …  如何度量传播者的传播能力The SIR model is chosen to simulate spreading on complex networks.  The SIR dynamics proceeds">
+<meta name="keywords" content="复杂网络">
+<meta property="og:type" content="article">
+<meta property="og:title" content="基于传播动力学衡量节点影响力">
+<meta property="og:url" content="http://yoursite.com/2017/05/25/基于传播动力学衡量节点影响力/index.html">
+<meta property="og:site_name" content="Choi&#39;s Blog">
+<meta property="og:description" content="基于网络动力学的传播影响力排序 已有方法： Degree betweenness closeness eigenvector centrality k-shell coreness …  如何度量传播者的传播能力The SIR model is chosen to simulate spreading on complex networks.  The SIR dynamics proceeds">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://imglf1.nosdn.127.net/img/Q20zbTVFMnRqRVVFYURheDhod3FIVjB0KzlxdmJiY0E0SUU2L0FDN3hENnFaODJnVTEyU0FBPT0.png?imageView&thumbnail=1680x0&quality=96&stripmeta=0&type=jpg">
+<meta property="og:image" content="https://62e528761d0685343e1c-f3d1b99a743ffa4142d9d7f1978d9686.ssl.cf2.rackcdn.com/files/89057/width668/image-20150720-12527-16prslk.jpeg">
+<meta property="og:image" content="http://imglf1.nosdn.127.net/img/Q20zbTVFMnRqRVVFYURheDhod3FIWGdDZENzQWc2aWN3bWUxQ3ZKdjFGOE91M05wbnFIWFpnPT0.png?imageView&thumbnail=1680x0&quality=96&stripmeta=0&type=jpg">
+<meta property="og:image" content="http://imglf1.nosdn.127.net/img/Q20zbTVFMnRqRVVFYURheDhod3FIVndUNVA0UVhyQmhGbVBNY2t4QVJoajJoUWtkVXhaVHB3PT0.png?imageView&thumbnail=1680x0&quality=96&stripmeta=0&type=jpg">
+<meta property="og:image" content="http://imglf2.nosdn.127.net/img/Q20zbTVFMnRqRVVFYURheDhod3FIVTJjU1d5STMrRnlVQWthNmF4N1MwcG5vZTVPN0IwdzlBPT0.png?imageView&thumbnail=1680x0&quality=96&stripmeta=0&type=jpg">
+<meta property="og:image" content="http://imglf0.nosdn.127.net/img/Q20zbTVFMnRqRVVFYURheDhod3FIVzltbXN0dWRqbjJ6VVBEZmFCZnZxM2N0VFpoR0dTci9RPT0.png?imageView&thumbnail=1680x0&quality=96&stripmeta=0&type=jpg">
+<meta property="og:image" content="http://imglf.nosdn.127.net/img/Q20zbTVFMnRqRVVFYURheDhod3FIYWd6YmxsN1dpZExhSnR3Q0ZKZ01xWE1EZGRaSmhxUldnPT0.png?imageView&thumbnail=1680x0&quality=96&stripmeta=0&type=jpg">
+<meta property="og:updated_time" content="2017-10-02T06:05:28.001Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="基于传播动力学衡量节点影响力">
+<meta name="twitter:description" content="基于网络动力学的传播影响力排序 已有方法： Degree betweenness closeness eigenvector centrality k-shell coreness …  如何度量传播者的传播能力The SIR model is chosen to simulate spreading on complex networks.  The SIR dynamics proceeds">
+<meta name="twitter:image" content="http://imglf1.nosdn.127.net/img/Q20zbTVFMnRqRVVFYURheDhod3FIVjB0KzlxdmJiY0E0SUU2L0FDN3hENnFaODJnVTEyU0FBPT0.png?imageView&thumbnail=1680x0&quality=96&stripmeta=0&type=jpg">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/05/25/基于传播动力学衡量节点影响力/"/>
+
+
+  <title> 基于传播动力学衡量节点影响力 | Choi's Blog </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta custom-logo">
+  
+    <div class="site-meta-headline">
+      <a>
+        <img class="custom-logo-image" src="/images/avatar.png"
+             alt="Choi's Blog"/>
+      </a>
+    </div>
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Choi's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">Don't expect to get care from others if you want to be stronger</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-schedule">
+          <a href="/schedule" rel="section">
+            
+            日程
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                基于传播动力学衡量节点影响力
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-05-25T22:17:01+08:00" content="2017-05-25">
+              2017-05-25
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/05/25/基于传播动力学衡量节点影响力/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/05/25/基于传播动力学衡量节点影响力/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="基于网络动力学的传播影响力排序"><a href="#基于网络动力学的传播影响力排序" class="headerlink" title="基于网络动力学的传播影响力排序"></a>基于网络动力学的传播影响力排序</h1><p><img src="http://imglf1.nosdn.127.net/img/Q20zbTVFMnRqRVVFYURheDhod3FIVjB0KzlxdmJiY0E0SUU2L0FDN3hENnFaODJnVTEyU0FBPT0.png?imageView&amp;thumbnail=1680x0&amp;quality=96&amp;stripmeta=0&amp;type=jpg" alt=""></p>
+<h2 id="已有方法："><a href="#已有方法：" class="headerlink" title="已有方法："></a>已有方法：</h2><ul>
+<li>Degree</li>
+<li>betweenness</li>
+<li>closeness</li>
+<li>eigenvector centrality</li>
+<li>k-shell coreness</li>
+<li>…</li>
+</ul>
+<h2 id="如何度量传播者的传播能力"><a href="#如何度量传播者的传播能力" class="headerlink" title="如何度量传播者的传播能力"></a>如何度量传播者的传播能力</h2><p>The SIR model is chosen to simulate spreading on complex networks.</p>
+<p><img src="https://62e528761d0685343e1c-f3d1b99a743ffa4142d9d7f1978d9686.ssl.cf2.rackcdn.com/files/89057/width668/image-20150720-12527-16prslk.jpeg" alt=""></p>
+<p>The SIR dynamics proceeds from the seed infected node to other nodes until there is no infected node in the network</p>
+<p>传播能力：</p>
+<p>The recovered nodes at the end are those once infected and the fraction of recovered nodes gives the final infected range of the initial seed.</p>
+<p>（对于我们的Pagerank-core，我猜测对应的传播动力学应该是SIS或者SIRS）</p>
+<h2 id="如何比较不同方法预测节点传播能力的准确性"><a href="#如何比较不同方法预测节点传播能力的准确性" class="headerlink" title="如何比较不同方法预测节点传播能力的准确性"></a>如何比较不同方法预测节点传播能力的准确性</h2><p>1.Kendall’s tau correlation</p>
+<p><img src="http://imglf1.nosdn.127.net/img/Q20zbTVFMnRqRVVFYURheDhod3FIWGdDZENzQWc2aWN3bWUxQ3ZKdjFGOE91M05wbnFIWFpnPT0.png?imageView&amp;thumbnail=1680x0&amp;quality=96&amp;stripmeta=0&amp;type=jpg" alt=""></p>
+<p>2.imprecision function</p>
+<p><img src="http://imglf1.nosdn.127.net/img/Q20zbTVFMnRqRVVFYURheDhod3FIVndUNVA0UVhyQmhGbVBNY2t4QVJoajJoUWtkVXhaVHB3PT0.png?imageView&amp;thumbnail=1680x0&amp;quality=96&amp;stripmeta=0&amp;type=jpg" alt=""></p>
+<h2 id="在有向加权网络上如何比较？"><a href="#在有向加权网络上如何比较？" class="headerlink" title="在有向加权网络上如何比较？"></a>在有向加权网络上如何比较？</h2><ul>
+<li>s-shell</li>
+</ul>
+<p><img src="http://imglf2.nosdn.127.net/img/Q20zbTVFMnRqRVVFYURheDhod3FIVTJjU1d5STMrRnlVQWthNmF4N1MwcG5vZTVPN0IwdzlBPT0.png?imageView&amp;thumbnail=1680x0&amp;quality=96&amp;stripmeta=0&amp;type=jpg" alt=""></p>
+<ul>
+<li><p>paper提出的方法：</p>
+<p><img src="http://imglf0.nosdn.127.net/img/Q20zbTVFMnRqRVVFYURheDhod3FIVzltbXN0dWRqbjJ6VVBEZmFCZnZxM2N0VFpoR0dTci9RPT0.png?imageView&amp;thumbnail=1680x0&amp;quality=96&amp;stripmeta=0&amp;type=jpg" alt=""></p>
+<p>即，重新定义权重，再计算s-shell</p>
+</li>
+</ul>
+<h3 id="S-shell的计算"><a href="#S-shell的计算" class="headerlink" title="S-shell的计算"></a>S-shell的计算</h3><p>  <img src="http://imglf.nosdn.127.net/img/Q20zbTVFMnRqRVVFYURheDhod3FIYWd6YmxsN1dpZExhSnR3Q0ZKZ01xWE1EZGRaSmhxUldnPT0.png?imageView&amp;thumbnail=1680x0&amp;quality=96&amp;stripmeta=0&amp;type=jpg" alt=""></p>
+<h2 id="Data-Sets"><a href="#Data-Sets" class="headerlink" title="Data Sets"></a>Data Sets</h2><ul>
+<li>CA-Hep (giant connected component of collaboration network of arXiv in high energy physics theory)</li>
+<li>Astro physics (collaboration network of astrophysics scientists)</li>
+<li>Emailcontact(email contacts at Computer Science Department of University College London)</li>
+<li>PGP (an encrypted communication network)</li>
+<li>Blog (the communication relationships between owners of blogs on the MSN (Windows Live)Spaces website)</li>
+<li>AS (Internet at the autonomous system level)</li>
+<li>Router (the router level topology of the Internet, collected by the Rocketfuel Project)</li>
+<li>Hamster (friendships and family links between users of the website hamsterster.com)</li>
+<li>Netsci (collaboration network of network scientists)</li>
+</ul>
+<h2 id="表现"><a href="#表现" class="headerlink" title="表现"></a>表现</h2>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/复杂网络/" rel="tag">#复杂网络</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/05/03/virtualenv-创建一个python虚拟环境/" rel="next" title="virtualenv--创建一个python虚拟环境">
+                <i class="fa fa-chevron-left"></i> virtualenv--创建一个python虚拟环境
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/05/31/work-plan2017/" rel="prev" title="WorkPlan2017">
+                WorkPlan2017 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2017/05/25/基于传播动力学衡量节点影响力/"
+           data-title="基于传播动力学衡量节点影响力" data-url="http://yoursite.com/2017/05/25/基于传播动力学衡量节点影响力/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="简兮" />
+          <p class="site-author-name" itemprop="name">简兮</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">27</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">20</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#基于网络动力学的传播影响力排序"><span class="nav-number">1.</span> <span class="nav-text">基于网络动力学的传播影响力排序</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#已有方法："><span class="nav-number">1.1.</span> <span class="nav-text">已有方法：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何度量传播者的传播能力"><span class="nav-number">1.2.</span> <span class="nav-text">如何度量传播者的传播能力</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何比较不同方法预测节点传播能力的准确性"><span class="nav-number">1.3.</span> <span class="nav-text">如何比较不同方法预测节点传播能力的准确性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在有向加权网络上如何比较？"><span class="nav-number">1.4.</span> <span class="nav-text">在有向加权网络上如何比较？</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#S-shell的计算"><span class="nav-number">1.4.1.</span> <span class="nav-text">S-shell的计算</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Data-Sets"><span class="nav-number">1.5.</span> <span class="nav-text">Data Sets</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#表现"><span class="nav-number">1.6.</span> <span class="nav-text">表现</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  Mon Oct 31 2016 08:00:00 GMT+0800 (DST) - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">简兮</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"hashc"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for (i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+  <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+  
+
+  
+
+  
+
+
+</body>
+</html>

@@ -1,0 +1,664 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="python,爬虫," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="好几次因为不同的需要用到网络爬虫，于是到网上看了不少大神的博客，收益匪浅。下面把自己零零散散地学了一点相关的知识整理下来，方便自己和看到这篇博客的你。Python环境3.5 1.爬虫大概 网络蜘蛛（Web spider）也叫网络爬虫（Web crawler）[1]，蚂蚁（ant），自动检索工具（automatic indexer），或者（在FOAF软件概念中）网络疾走（WEB scutter），是">
+<meta name="keywords" content="python,爬虫">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python爬虫学习(一)">
+<meta property="og:url" content="http://yoursite.com/2016/12/19/python爬虫学习-一/index.html">
+<meta property="og:site_name" content="Choi&#39;s Blog">
+<meta property="og:description" content="好几次因为不同的需要用到网络爬虫，于是到网上看了不少大神的博客，收益匪浅。下面把自己零零散散地学了一点相关的知识整理下来，方便自己和看到这篇博客的你。Python环境3.5 1.爬虫大概 网络蜘蛛（Web spider）也叫网络爬虫（Web crawler）[1]，蚂蚁（ant），自动检索工具（automatic indexer），或者（在FOAF软件概念中）网络疾走（WEB scutter），是">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-10-02T06:05:27.996Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="python爬虫学习(一)">
+<meta name="twitter:description" content="好几次因为不同的需要用到网络爬虫，于是到网上看了不少大神的博客，收益匪浅。下面把自己零零散散地学了一点相关的知识整理下来，方便自己和看到这篇博客的你。Python环境3.5 1.爬虫大概 网络蜘蛛（Web spider）也叫网络爬虫（Web crawler）[1]，蚂蚁（ant），自动检索工具（automatic indexer），或者（在FOAF软件概念中）网络疾走（WEB scutter），是">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/12/19/python爬虫学习-一/"/>
+
+
+  <title> python爬虫学习(一) | Choi's Blog </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta custom-logo">
+  
+    <div class="site-meta-headline">
+      <a>
+        <img class="custom-logo-image" src="/images/avatar.png"
+             alt="Choi's Blog"/>
+      </a>
+    </div>
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Choi's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">Don't expect to get care from others if you want to be stronger</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-schedule">
+          <a href="/schedule" rel="section">
+            
+            日程
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                python爬虫学习(一)
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-12-19T21:35:47+08:00" content="2016-12-19">
+              2016-12-19
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/12/19/python爬虫学习-一/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/12/19/python爬虫学习-一/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>好几次因为不同的需要用到网络爬虫，于是到网上看了不少大神的博客，收益匪浅。下面把自己零零散散地学了一点相关的知识整理下来，方便自己和看到这篇博客的你。<br>Python环境3.5</p>
+<h3 id="1-爬虫大概"><a href="#1-爬虫大概" class="headerlink" title="1.爬虫大概"></a>1.爬虫大概</h3><blockquote>
+<p>网络蜘蛛（Web spider）也叫网络爬虫（Web crawler）[1]，蚂蚁（ant），自动检索工具（automatic indexer），或者（在FOAF软件概念中）网络疾走（WEB scutter），是一种“自动化浏览网络”的程序，或者说是一种网络机器人。它们被广泛用于互联网搜索引擎或其他类似网站，以获取或更新这些网站的内容和检索方式。它们可以自动采集所有其能够访问到的页面内容，以供搜索引擎做进一步处理（分检整理下载的页面），而使得用户能更快的检索到他们需要的信息。</p>
+<p>​                                                                                                                                    –引自<a href="https://zh.wikipedia.org/wiki/%E7%B6%B2%E8%B7%AF%E8%9C%98%E8%9B%9B" target="_blank" rel="external">Wikipedia词条网络蜘蛛</a></p>
+</blockquote>
+<h3 id="2-初学者"><a href="#2-初学者" class="headerlink" title="2.初学者"></a>2.初学者</h3><p>作为初学者，我只想快速实现爬虫，爬虫的量也不大，那么我该怎么开始呢 ？</p>
+<p>首先介绍几个比较好的爬虫学习的地方:</p>
+<p><a href="https://www.zhihu.com/question/20899988" target="_blank" rel="external"><font color="#EE1196"> 知乎：如何入门python爬虫</font></a>,   对于小白，这永远是个快速寻找和学习知识的好地方</p>
+<p><a href="http://cuiqingcai.com/1052.html" target="_blank" rel="external"><font color="#EE1196"> 静觅的Python爬虫学习系列教程</font></a>，也是一个很厉害的博主写的爬虫教程</p>
+<p>我主要是通过以上两个地方来学爬虫，当然，遇到问题也会去google，看看[<font color="#44BB74">segmentfault</font>]上大家有没有遇到相关的问题。</p>
+<h3 id="3-基础知识"><a href="#3-基础知识" class="headerlink" title="3.基础知识"></a>3.基础知识</h3><p>我只是掌握一点Python常用知识的小白，然后就匆匆上马爬虫了，下面列出我常用的爬虫或者辅助的python包</p>
+<ul>
+<li><font color="#EE1196">urllib</font><br>主要是调用里面的request来递交网页请求的  </li>
+<li><font color="#EE1196">bs4</font><br>Beautifulsoup是爬虫分析的必备神器        </li>
+<li><font color="#EE1196">selenium</font><br>可以用来模拟agent对网页操作的包，配上PhantomJS这个无界面的网页浏览器，基本可以对付很多限制爬虫的网站了</li>
+<li><font color="#EE1196">re</font>Beautifulsoup<br>用来帮助你使用正则表达的包，不过一般的网页的结构化都做的很好，经过Beautifulsoup解析后，基本很少会用到re<br>当然了，基本的Python能力也是要有的<br>另外，scrapy这个爬虫框架据说也是大杀器，但基本没用过，以后可以试着用用写一下<h3 id="4-例子"><a href="#4-例子" class="headerlink" title="4.例子"></a>4.例子</h3>这里，我用几个例子来说明如何去使用这些包做基本的爬虫<br>先导入urllib.request<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> urllib.request</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>假设我们要访问的网页是：”<a href="http://baidu.com" target="_blank" rel="external">http://baidu.com</a>“<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">url = <span class="string">"http://baidu.com"</span></div><div class="line">htmlpage = urllib.request.urlopen(url).read().decode(<span class="string">'gb2312'</span>,<span class="string">'ignore'</span>)</div></pre></td></tr></table></figure></p>
+<p>上述代码实现了对网页的访问、读取、gb2312的转码<br>然后，我们就可以使用Beautifulsoup来对htmlpage的结构进行解析了，至于一个标准网页的源码的结构是怎样的，建议大家可去W3Cschool去看看<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> bs4 <span class="keyword">import</span> BeautifulSoup</div><div class="line">soup = BeautifulSoup(htmlpage,<span class="string">"xml"</span>)</div><div class="line"><span class="comment">#soup = BeautifulSoup(htmlpage,"lxml")</span></div><div class="line">body = soup.body</div></pre></td></tr></table></figure></p>
+<p>如大家所见，我们很快就把一个网页源码的body部分提取出来了。<br>然后，我们可以用find_all或者find函数来查找你需要爬的部分,比如“li”,”div”等结构里的内容，具体使用可以参看相关的博客。如果你用的是chrome,你可以在工具一栏里找到开发人员工具，然后找到你要爬的内容的位置。<br>你可以使用.get()来寻找引用链接’href’，或者’a’之间的内容<br>总之，你要记住，html语言是一门非常强调结构化的语言，而爬虫的过程需要你尽可能利用它的结构化来减少编程的工作量</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/python/" rel="tag">#python</a>
+          
+            <a href="/tags/爬虫/" rel="tag">#爬虫</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/11/28/形成自己的Taste/" rel="next" title="形成自己的Taste">
+                <i class="fa fa-chevron-left"></i> 形成自己的Taste
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/12/21/安装phantomjs/" rel="prev" title="安装phantomjs">
+                安装phantomjs <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/12/19/python爬虫学习-一/"
+           data-title="python爬虫学习(一)" data-url="http://yoursite.com/2016/12/19/python爬虫学习-一/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="简兮" />
+          <p class="site-author-name" itemprop="name">简兮</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">27</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">20</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-爬虫大概"><span class="nav-number">1.</span> <span class="nav-text">1.爬虫大概</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-初学者"><span class="nav-number">2.</span> <span class="nav-text">2.初学者</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-基础知识"><span class="nav-number">3.</span> <span class="nav-text">3.基础知识</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-例子"><span class="nav-number">4.</span> <span class="nav-text">4.例子</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  Mon Oct 31 2016 08:00:00 GMT+0800 (DST) - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">简兮</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"hashc"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for (i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+  <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+  
+
+  
+
+  
+
+
+</body>
+</html>

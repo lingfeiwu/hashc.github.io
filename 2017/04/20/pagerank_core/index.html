@@ -1,0 +1,748 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="pagerank,k_core," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="pr-core的工作1.定义 给定M是概率转移矩阵，就是网络邻接矩阵对应的归一化矩阵  计算p=pM，p是M最大本征值对应的本征向量，也就是不带随机游走项的pagerank值  pagerank_core定义为： ​        $$pr_c=\frac{kc}{\sum{i,j}W_{ij}}$$ 其中，$\sum{i,j}W{ij}$是邻接矩阵的和，也就是所有边的数目的两倍，或者是网络的每个">
+<meta name="keywords" content="pagerank,k_core">
+<meta property="og:type" content="article">
+<meta property="og:title" content="pagerank_core">
+<meta property="og:url" content="http://yoursite.com/2017/04/20/pagerank_core/index.html">
+<meta property="og:site_name" content="Choi&#39;s Blog">
+<meta property="og:description" content="pr-core的工作1.定义 给定M是概率转移矩阵，就是网络邻接矩阵对应的归一化矩阵  计算p=pM，p是M最大本征值对应的本征向量，也就是不带随机游走项的pagerank值  pagerank_core定义为： ​        $$pr_c=\frac{kc}{\sum{i,j}W_{ij}}$$ 其中，$\sum{i,j}W{ij}$是邻接矩阵的和，也就是所有边的数目的两倍，或者是网络的每个">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://imglf0.nosdn.127.net/img/Q20zbTVFMnRqRVVBOW9FNkh6dWVoSllQSlRGWHN1akxWNDJGZXh2Unl1eG9yUVc4TWk0cGxRPT0.png?imageView&thumbnail=1680x0&quality=96&stripmeta=0&type=jpg">
+<meta property="og:image" content="http://imglf1.nosdn.127.net/img/Q20zbTVFMnRqRVdnejFseXNrd1BMcHNVcVdsZC80TGp3MWZDV004WjJUZG5kNDNtZ0dMZ25BPT0.png?imageView&thumbnail=1680x0&quality=96&stripmeta=0&type=jpg">
+<meta property="og:image" content="http://imglf1.nosdn.127.net/img/Q20zbTVFMnRqRVdnejFseXNrd1BMdVZWcHN6blJBenBXSDhwMGoxQVpBQUtpRlA4TFlJNVNRPT0.png?imageView&thumbnail=1680x0&quality=96&stripmeta=0&type=jpg">
+<meta property="og:image" content="http://imglf0.nosdn.127.net/img/Q20zbTVFMnRqRVVBOW9FNkh6dWVoTXJvdHJWVStGenZrSjk2TkoxOUQrVytMQVhiRGlPdS9RPT0.png?imageView&thumbnail=1680x0&quality=96&stripmeta=0&type=jpg">
+<meta property="og:image" content="http://imglf2.nosdn.127.net/img/Q20zbTVFMnRqRVd6K2hHSXN4KzNpcStXQWxzQjJyOWMyd0RIQU1ZbytyUDdsMnNVUXp4cldBPT0.png?imageView&thumbnail=1680x0&quality=96&stripmeta=0&type=jpg">
+<meta property="og:image" content="http://imglf2.nosdn.127.net/img/Q20zbTVFMnRqRVd6K2hHSXN4KzNpdCtBdTJnSlNrOE9LZFk2dER0NVM0ZWlPZ1AyNEJQaklRPT0.png?imageView&thumbnail=1680x0&quality=96&stripmeta=0&type=jpg">
+<meta property="og:image" content="http://imglf2.nosdn.127.net/img/Q20zbTVFMnRqRVd6K2hHSXN4KzNpcEo5ZVFmUTNLY3ZPYTBFNXpHVzhER3JaSXBkOHpjWWZ3PT0.png?imageView&thumbnail=500x0&quality=96&stripmeta=0&type=jpg">
+<meta property="og:image" content="http://imglf1.nosdn.127.net/img/Q20zbTVFMnRqRVd6K2hHSXN4KzNpaGpORlAxZ2NBMTR1dnppTWJxMnZSS3NRR3l0eUpGaEV3PT0.png?imageView&thumbnail=500x0&quality=96&stripmeta=0&type=jpg">
+<meta property="og:image" content="http://imglf2.nosdn.127.net/img/Q20zbTVFMnRqRVd6K2hHSXN4KzNpaXJHbE1VUHhMM2VXVFhEOEI3dll1am9aUjZXTWozbzdBPT0.png?imageView&thumbnail=500x0&quality=96&stripmeta=0&type=jpg">
+<meta property="og:image" content="http://imglf0.nosdn.127.net/img/Q20zbTVFMnRqRVd6K2hHSXN4KzNpc0J5Z0VDUTdYdkRlYkltVFNrWjRJWkZHZWEzU28wOXdnPT0.png?imageView&thumbnail=1680x0&quality=96&stripmeta=0&type=jpg">
+<meta property="og:image" content="http://imglf1.nosdn.127.net/img/Q20zbTVFMnRqRVd6K2hHSXN4KzNpdUgyS0xUeFEzM3BSQ1BCdUIrUWd1STNVU3RBSjJzZWJnPT0.png?imageView&thumbnail=1680x0&quality=96&stripmeta=0&type=jpg">
+<meta property="og:image" content="http://imglf.nosdn.127.net/img/Q20zbTVFMnRqRVZFZkwzemp0ZHpuTUtqTi9wWFo0OFNBWWNwWmU2MGd6NC9SSXJyMUZBN1pnPT0.png?imageView&thumbnail=1680x0&quality=96&stripmeta=0&type=jpg">
+<meta property="og:image" content="http://imglf0.nosdn.127.net/img/Q20zbTVFMnRqRVZFZkwzemp0ZHpuR1dwRU5IblE3NGVzb2lISUVvUysxV1V6MXZMNzl0WXBnPT0.png?imageView&thumbnail=1680x0&quality=96&stripmeta=0&type=jpg">
+<meta property="og:image" content="http://imglf2.nosdn.127.net/img/Q20zbTVFMnRqRVVFYURheDhod3FIVHo0d3k5dGh3eWl2YURpQStDb2R2d3dxRExPOTZQNHhRPT0.png?imageView&thumbnail=2000y2000&type=jpg&quality=96&stripmeta=0&type=jpg">
+<meta property="og:updated_time" content="2017-10-02T06:05:27.995Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="pagerank_core">
+<meta name="twitter:description" content="pr-core的工作1.定义 给定M是概率转移矩阵，就是网络邻接矩阵对应的归一化矩阵  计算p=pM，p是M最大本征值对应的本征向量，也就是不带随机游走项的pagerank值  pagerank_core定义为： ​        $$pr_c=\frac{kc}{\sum{i,j}W_{ij}}$$ 其中，$\sum{i,j}W{ij}$是邻接矩阵的和，也就是所有边的数目的两倍，或者是网络的每个">
+<meta name="twitter:image" content="http://imglf0.nosdn.127.net/img/Q20zbTVFMnRqRVVBOW9FNkh6dWVoSllQSlRGWHN1akxWNDJGZXh2Unl1eG9yUVc4TWk0cGxRPT0.png?imageView&thumbnail=1680x0&quality=96&stripmeta=0&type=jpg">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/04/20/pagerank_core/"/>
+
+
+  <title> pagerank_core | Choi's Blog </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta custom-logo">
+  
+    <div class="site-meta-headline">
+      <a>
+        <img class="custom-logo-image" src="/images/avatar.png"
+             alt="Choi's Blog"/>
+      </a>
+    </div>
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Choi's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">Don't expect to get care from others if you want to be stronger</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-schedule">
+          <a href="/schedule" rel="section">
+            
+            日程
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                pagerank_core
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-04-20T08:54:41+08:00" content="2017-04-20">
+              2017-04-20
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/04/20/pagerank_core/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/04/20/pagerank_core/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="pr-core的工作"><a href="#pr-core的工作" class="headerlink" title="pr-core的工作"></a>pr-core的工作</h1><h1 id="1-定义"><a href="#1-定义" class="headerlink" title="1.定义"></a>1.定义</h1><ul>
+<li><p>给定M是概率转移矩阵，就是网络邻接矩阵对应的归一化矩阵</p>
+</li>
+<li><p>计算p=pM，p是M最大本征值对应的本征向量，也就是不带随机游走项的pagerank值</p>
+</li>
+<li><p>pagerank_core定义为：</p>
+<p>​        $$pr_c=\frac{k<em>c}{\sum</em>{i,j}W_{ij}}$$</p>
+<p>其中，$\sum<em>{i,j}W</em>{ij}$是邻接矩阵的和，也就是所有边的数目的两倍，或者是网络的每个结点的度和</p>
+</li>
+<li><p>删除小于某个$pr_c$的结点，对剩下的结点在计算pagerank值，如此反复，直到不可删去，这些删去的结点对应此时的$pr_c$值</p>
+</li>
+<li><p>最终，得到整个网络的pagerank_core</p>
+</li>
+</ul>
+<h1 id="2-相关工作"><a href="#2-相关工作" class="headerlink" title="2.相关工作"></a>2.相关工作</h1><h3 id="2-1-无权无向网络上的pr-core"><a href="#2-1-无权无向网络上的pr-core" class="headerlink" title="2.1 无权无向网络上的pr_core"></a>2.1 无权无向网络上的pr_core</h3><ul>
+<li><p>在对一个全连通的undirected network，pagerank值对应的就是它的归一化后的度值</p>
+<p>$$(d_1,d_2,…,d_n)=(d_1,d_2,…,d_n)M$$</p>
+<p>也就是，当没有随机游走的时候，pr-core得到的结果应该与k_core一样，所以可以看看在有向网络和加权网络上，pr-core的效果</p>
+<p><img src="http://imglf0.nosdn.127.net/img/Q20zbTVFMnRqRVVBOW9FNkh6dWVoSllQSlRGWHN1akxWNDJGZXh2Unl1eG9yUVc4TWk0cGxRPT0.png?imageView&amp;thumbnail=1680x0&amp;quality=96&amp;stripmeta=0&amp;type=jpg" alt=""></p>
+</li>
+<li><p>对一个非全连通的网络，它的pagerank值的初始化默认是给每个节点赋同样的值，这就导致出现如下情况：（以随机生成的小世界1000个结点的网络为例，删去了一些结点后，图不连通了）</p>
+<p>可以找到联通的子图，对子图分别算pagerank值，然后按照子图的边值占总边数的比来乘以对应点的pr值，可以得到下图：</p>
+<p>问题是，需要这样吗？在一个大集团中小k_core的结点的传播能力可能比小集团大k-core的结点传播能力要强</p>
+</li>
+<li><p>数值计算问题</p>
+<p>绘制了随着alpha变化的pr_c，k_c与实际传播能力的坎德尔系数</p>
+<p>但由于计算中不可避免的遇到数值舍入的问题，会导致最终计算的当alpha=1时，与k_core有差异，而且还挺大</p>
+<p><img src="http://imglf1.nosdn.127.net/img/Q20zbTVFMnRqRVdnejFseXNrd1BMcHNVcVdsZC80TGp3MWZDV004WjJUZG5kNDNtZ0dMZ25BPT0.png?imageView&amp;thumbnail=1680x0&amp;quality=96&amp;stripmeta=0&amp;type=jpg" alt=""></p>
+<p>我稍微放宽了pr_core在实际计算中的条件（每次判断要不要舍弃的时候，原本是要求&lt;pr-core，放宽到&lt;pr_core+0.001）</p>
+<p><img src="http://imglf1.nosdn.127.net/img/Q20zbTVFMnRqRVdnejFseXNrd1BMdVZWcHN6blJBenBXSDhwMGoxQVpBQUtpRlA4TFlJNVNRPT0.png?imageView&amp;thumbnail=1680x0&amp;quality=96&amp;stripmeta=0&amp;type=jpg" alt=""></p>
+</li>
+</ul>
+<p>也就是说，在无权无向网络上，不加随机游走，比加随机游走项效果要好。</p>
+<p>下图是$alpha=0.85$的pr_core与k_core的对比</p>
+<p><img src="http://imglf0.nosdn.127.net/img/Q20zbTVFMnRqRVVBOW9FNkh6dWVoTXJvdHJWVStGenZrSjk2TkoxOUQrVytMQVhiRGlPdS9RPT0.png?imageView&amp;thumbnail=1680x0&amp;quality=96&amp;stripmeta=0&amp;type=jpg" alt=""></p>
+<h3 id="2-2-文献调研，在有向加权网络上的推广"><a href="#2-2-文献调研，在有向加权网络上的推广" class="headerlink" title="2.2 文献调研，在有向加权网络上的推广"></a>2.2 文献调研，在有向加权网络上的推广</h3><h4 id="2-2-1-基于词共现矩阵做关键词提取"><a href="#2-2-1-基于词共现矩阵做关键词提取" class="headerlink" title="2.2.1 基于词共现矩阵做关键词提取"></a>2.2.1 基于词共现矩阵做关键词提取</h4><p>1.François Rousseau,etc,2015,Main Core Retention on Graph-of-words for Single-Document Keyword Extraction</p>
+<p><img src="http://imglf2.nosdn.127.net/img/Q20zbTVFMnRqRVd6K2hHSXN4KzNpcStXQWxzQjJyOWMyd0RIQU1ZbytyUDdsMnNVUXp4cldBPT0.png?imageView&amp;thumbnail=1680x0&amp;quality=96&amp;stripmeta=0&amp;type=jpg" alt=""></p>
+<p>用词共现矩阵建网络，边权重是共同出现频率，利用边权重累加计算WK-core,在关键词提取上效果好于Pagerank 和k-core</p>
+<p><img src="http://imglf2.nosdn.127.net/img/Q20zbTVFMnRqRVd6K2hHSXN4KzNpdCtBdTJnSlNrOE9LZFk2dER0NVM0ZWlPZ1AyNEJQaklRPT0.png?imageView&amp;thumbnail=1680x0&amp;quality=96&amp;stripmeta=0&amp;type=jpg" alt=""></p>
+<h4 id="2-2-2-用Fractionalk-core来评价合作"><a href="#2-2-2-用Fractionalk-core来评价合作" class="headerlink" title="2.2.2 用Fractionalk -core来评价合作"></a>2.2.2 用Fractionalk -core来评价合作</h4><p>Christos Giatsidis,etc,2011,Evaluating cooperation in communities with the k -core structure</p>
+<p>$W(e<em>{x,x^{‘}})=\sum\limits</em>{y\in N(x) \cap N(x^{‘})}\frac{1}{|N(y)|}$ </p>
+<p>$\sum\limits_{e\in G} w(e)=|V(P)|$</p>
+<p>x,x’分别代表作者，N(x)是x发表的文章，y是他们的共同文章，N(y)是引用文章y的文章集合</p>
+<p><img src="http://imglf2.nosdn.127.net/img/Q20zbTVFMnRqRVd6K2hHSXN4KzNpcEo5ZVFmUTNLY3ZPYTBFNXpHVzhER3JaSXBkOHpjWWZ3PT0.png?imageView&amp;thumbnail=500x0&amp;quality=96&amp;stripmeta=0&amp;type=jpg" alt=""></p>
+<h4 id="2-2-3-D-core-有向网上的k-core"><a href="#2-2-3-D-core-有向网上的k-core" class="headerlink" title="2.2.3 D-core,有向网上的k-core"></a>2.2.3 D-core,有向网上的k-core</h4><p>Christos Giatsidis,2011,D-cores: measuring collaboration of directed graphsbased on degeneracy</p>
+<p><img src="http://imglf1.nosdn.127.net/img/Q20zbTVFMnRqRVd6K2hHSXN4KzNpaGpORlAxZ2NBMTR1dnppTWJxMnZSS3NRR3l0eUpGaEV3PT0.png?imageView&amp;thumbnail=500x0&amp;quality=96&amp;stripmeta=0&amp;type=jpg" alt=""></p>
+<p><img src="http://imglf2.nosdn.127.net/img/Q20zbTVFMnRqRVd6K2hHSXN4KzNpaXJHbE1VUHhMM2VXVFhEOEI3dll1am9aUjZXTWozbzdBPT0.png?imageView&amp;thumbnail=500x0&amp;quality=96&amp;stripmeta=0&amp;type=jpg" alt=""></p>
+<p><img src="http://imglf0.nosdn.127.net/img/Q20zbTVFMnRqRVd6K2hHSXN4KzNpc0J5Z0VDUTdYdkRlYkltVFNrWjRJWkZHZWEzU28wOXdnPT0.png?imageView&amp;thumbnail=1680x0&amp;quality=96&amp;stripmeta=0&amp;type=jpg" alt=""></p>
+<p><img src="http://imglf1.nosdn.127.net/img/Q20zbTVFMnRqRVd6K2hHSXN4KzNpdUgyS0xUeFEzM3BSQ1BCdUIrUWd1STNVU3RBSjJzZWJnPT0.png?imageView&amp;thumbnail=1680x0&amp;quality=96&amp;stripmeta=0&amp;type=jpg" alt=""></p>
+<h3 id="3-有向网上的pr-core实证"><a href="#3-有向网上的pr-core实证" class="headerlink" title="3.有向网上的pr_core实证"></a>3.有向网上的pr_core实证</h3><p>一般而言，有向网络上的k_core可以用以下三种方法来计算：</p>
+<ul>
+<li><p>转为无向网络</p>
+</li>
+<li><p>只考虑入度</p>
+</li>
+<li><p>只考虑出度</p>
+<p>​</p>
+</li>
+</ul>
+<p><img src="http://imglf.nosdn.127.net/img/Q20zbTVFMnRqRVZFZkwzemp0ZHpuTUtqTi9wWFo0OFNBWWNwWmU2MGd6NC9SSXJyMUZBN1pnPT0.png?imageView&amp;thumbnail=1680x0&amp;quality=96&amp;stripmeta=0&amp;type=jpg" alt=""></p>
+<p>上图是$\alpha=1$时，pr<em>core与$k^{in}</em>{core}$的比较，其它情况也相似</p>
+<p>$k_{in}$二者关于传播能力的坎德尔系数，pr<em>core是0.93,$k^{in}</em>{core}$是0.96.</p>
+<p>其他情况类似，下图是三者与Pagerank_core的对比：</p>
+<p><img src="http://imglf0.nosdn.127.net/img/Q20zbTVFMnRqRVZFZkwzemp0ZHpuR1dwRU5IblE3NGVzb2lISUVvUysxV1V6MXZMNzl0WXBnPT0.png?imageView&amp;thumbnail=1680x0&amp;quality=96&amp;stripmeta=0&amp;type=jpg" alt=""></p>
+<p>数据源：WIki_vote有向网络</p>
+<p>最后，对比了预测前100名中不同方法的准确度：</p>
+<ul>
+<li>$k_{core}$预测对了19个，</li>
+</ul>
+<ul>
+<li>$k^{in}_{core}$预测对了79个，</li>
+<li>$\alpha=1$的$pr_{core}$预测对了16个</li>
+</ul>
+<p>200名中：</p>
+<ul>
+<li>$k_{core}$预测对了71个，</li>
+</ul>
+<ul>
+<li>$k^{in}_{core}$预测对了163个，</li>
+<li>$\alpha=1$的$pr_{core}$预测对了53个</li>
+</ul>
+<p>200名中：</p>
+<ul>
+<li>$k_{core}$预测对了324个，</li>
+</ul>
+<ul>
+<li>$k^{in}_{core}$预测对了422个，</li>
+<li>$\alpha=1$的$pr_{core}$预测对了324个</li>
+</ul>
+<p><img src="http://imglf2.nosdn.127.net/img/Q20zbTVFMnRqRVVFYURheDhod3FIVHo0d3k5dGh3eWl2YURpQStDb2R2d3dxRExPOTZQNHhRPT0.png?imageView&amp;thumbnail=2000y2000&amp;type=jpg&amp;quality=96&amp;stripmeta=0&amp;type=jpg" alt=""></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/pagerank/" rel="tag">#pagerank</a>
+          
+            <a href="/tags/k-core/" rel="tag">#k_core</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/04/13/python-igraph初探/" rel="next" title="python-igraph初探">
+                <i class="fa fa-chevron-left"></i> python-igraph初探
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/05/02/django学习之上手准备/" rel="prev" title="django学习之上手准备">
+                django学习之上手准备 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2017/04/20/pagerank_core/"
+           data-title="pagerank_core" data-url="http://yoursite.com/2017/04/20/pagerank_core/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="简兮" />
+          <p class="site-author-name" itemprop="name">简兮</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">27</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">20</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#pr-core的工作"><span class="nav-number">1.</span> <span class="nav-text">pr-core的工作</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1-定义"><span class="nav-number">2.</span> <span class="nav-text">1.定义</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-相关工作"><span class="nav-number">3.</span> <span class="nav-text">2.相关工作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-无权无向网络上的pr-core"><span class="nav-number">3.0.1.</span> <span class="nav-text">2.1 无权无向网络上的pr_core</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-文献调研，在有向加权网络上的推广"><span class="nav-number">3.0.2.</span> <span class="nav-text">2.2 文献调研，在有向加权网络上的推广</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-1-基于词共现矩阵做关键词提取"><span class="nav-number">3.0.2.1.</span> <span class="nav-text">2.2.1 基于词共现矩阵做关键词提取</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-2-用Fractionalk-core来评价合作"><span class="nav-number">3.0.2.2.</span> <span class="nav-text">2.2.2 用Fractionalk -core来评价合作</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-3-D-core-有向网上的k-core"><span class="nav-number">3.0.2.3.</span> <span class="nav-text">2.2.3 D-core,有向网上的k-core</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-有向网上的pr-core实证"><span class="nav-number">3.0.3.</span> <span class="nav-text">3.有向网上的pr_core实证</span></a></li></ol></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  Mon Oct 31 2016 08:00:00 GMT+0800 (DST) - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">简兮</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"hashc"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for (i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+  <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+  
+
+  
+
+  
+
+
+</body>
+</html>

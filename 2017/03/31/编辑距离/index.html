@@ -1,0 +1,670 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="python," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="编辑距离1. 定义编辑距离，又称Levenshtein距离，是指两个字串之间，由一个转成另一个所需的最少编辑操作次数。 许可的编辑操作包括：将一个字符替换成另一个字符，插入一个字符，删除一个字符。 python里有专门的包实现python-Levenshtein 1sudo pip install python-Levenshtein 2. python实现2.1 python-Levenshte">
+<meta name="keywords" content="python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="编辑距离">
+<meta property="og:url" content="http://yoursite.com/2017/03/31/编辑距离/index.html">
+<meta property="og:site_name" content="Choi&#39;s Blog">
+<meta property="og:description" content="编辑距离1. 定义编辑距离，又称Levenshtein距离，是指两个字串之间，由一个转成另一个所需的最少编辑操作次数。 许可的编辑操作包括：将一个字符替换成另一个字符，插入一个字符，删除一个字符。 python里有专门的包实现python-Levenshtein 1sudo pip install python-Levenshtein 2. python实现2.1 python-Levenshte">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-10-02T06:05:28.004Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="编辑距离">
+<meta name="twitter:description" content="编辑距离1. 定义编辑距离，又称Levenshtein距离，是指两个字串之间，由一个转成另一个所需的最少编辑操作次数。 许可的编辑操作包括：将一个字符替换成另一个字符，插入一个字符，删除一个字符。 python里有专门的包实现python-Levenshtein 1sudo pip install python-Levenshtein 2. python实现2.1 python-Levenshte">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/03/31/编辑距离/"/>
+
+
+  <title> 编辑距离 | Choi's Blog </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta custom-logo">
+  
+    <div class="site-meta-headline">
+      <a>
+        <img class="custom-logo-image" src="/images/avatar.png"
+             alt="Choi's Blog"/>
+      </a>
+    </div>
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Choi's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">Don't expect to get care from others if you want to be stronger</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-schedule">
+          <a href="/schedule" rel="section">
+            
+            日程
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                编辑距离
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-03-31T14:45:32+08:00" content="2017-03-31">
+              2017-03-31
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/03/31/编辑距离/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/31/编辑距离/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="编辑距离"><a href="#编辑距离" class="headerlink" title="编辑距离"></a>编辑距离</h1><h2 id="1-定义"><a href="#1-定义" class="headerlink" title="1. 定义"></a>1. 定义</h2><p><strong>编辑距离，</strong>又称<strong>Levenshtein距离</strong>，是指两个字串之间，由一个转成另一个所需的最少编辑操作次数。</p>
+<p>许可的编辑操作包括：将一个字符替换成另一个字符，插入一个字符，删除一个字符。</p>
+<p>python里有专门的包实现<strong>python-Levenshtein</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo pip install python-Levenshtein</div></pre></td></tr></table></figure>
+<h2 id="2-python实现"><a href="#2-python实现" class="headerlink" title="2. python实现"></a>2. python实现</h2><h3 id="2-1-python-Levenshtein"><a href="#2-1-python-Levenshtein" class="headerlink" title="2.1 python-Levenshtein"></a>2.1 python-Levenshtein</h3><p>python里有专门的包实现<strong>python-Levenshtein</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo pip install python-Levenshtein</div></pre></td></tr></table></figure>
+<ul>
+<li><p>Levenshtein.hamming(str1,str2)</p>
+<p>计算两个<strong>长度</strong>一致的字符串的<strong>hamming距离</strong>,返回值是对应位置上不同字符的个数</p>
+<p>​</p>
+</li>
+</ul>
+<ul>
+<li><p>Levenshtein.distance(str1,str2)</p>
+<p>计算编辑距离，描述由一个字串转化成另一个字串<strong>最少</strong>的操作次数，在其中的操作包括<strong>插入</strong>、<strong>删除</strong>、<strong>替换</strong></p>
+<p>​</p>
+</li>
+<li><p>Levenshtein.ratio(str1,str2)</p>
+<p>计算公式  r = (sum - ldist) / sum, 其中sum是指str1 和 str2 字串的长度总和，ldist是<strong>类编辑距离</strong></p>
+<p><strong>注意</strong>：这里的类编辑距离不是编辑距离，在此处，删除、插入依然+1，但是替换+2</p>
+<p>这样设计的目的：ratio(‘a’, ‘c’)，sum=2,按2中计算为（2-1）/2 = 0.5,’a’,’c’没有重合，显然不合算，但是替换操作+2，就可以解决这个问题。</p>
+</li>
+</ul>
+<h3 id="2-2-如何用python实现编辑距离"><a href="#2-2-如何用python实现编辑距离" class="headerlink" title="2.2 如何用python实现编辑距离"></a>2.2 如何用python实现编辑距离</h3><p><a href="http://biansutao.iteye.com/blog/326008" target="_blank" rel="external">(引自http://biansutao.iteye.com/blog/326008)</a></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># -*- coding: utf-8 -*-  </span></div><div class="line">  </div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">arithmetic</span><span class="params">()</span>:</span>  </div><div class="line">      </div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span>  </div><div class="line">        <span class="keyword">pass</span>  </div><div class="line">    <span class="string">''''' 【编辑距离算法】 【levenshtein distance】 【字符串相似度算法】 '''</span>  </div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">levenshtein</span><span class="params">(self,first,second)</span>:</span>  </div><div class="line">        <span class="keyword">if</span> len(first) &gt; len(second):  </div><div class="line">            first,second = second,first  </div><div class="line">        <span class="keyword">if</span> len(first) == <span class="number">0</span>:  </div><div class="line">            <span class="keyword">return</span> len(second)  </div><div class="line">        <span class="keyword">if</span> len(second) == <span class="number">0</span>:  </div><div class="line">            <span class="keyword">return</span> len(first)  </div><div class="line">        first_length = len(first) + <span class="number">1</span>  </div><div class="line">        second_length = len(second) + <span class="number">1</span>  </div><div class="line">        distance_matrix = [range(second_length) <span class="keyword">for</span> x <span class="keyword">in</span> range(first_length)]   </div><div class="line">        <span class="comment">#print distance_matrix  </span></div><div class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>,first_length):  </div><div class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">1</span>,second_length):  </div><div class="line">                deletion = distance_matrix[i<span class="number">-1</span>][j] + <span class="number">1</span>  </div><div class="line">                insertion = distance_matrix[i][j<span class="number">-1</span>] + <span class="number">1</span>  </div><div class="line">                substitution = distance_matrix[i<span class="number">-1</span>][j<span class="number">-1</span>]  </div><div class="line">                <span class="keyword">if</span> first[i<span class="number">-1</span>] != second[j<span class="number">-1</span>]:  </div><div class="line">                    substitution += <span class="number">1</span>  </div><div class="line">                distance_matrix[i][j] = min(insertion,deletion,substitution)  </div><div class="line">        print(distance_matrix) </div><div class="line">        <span class="keyword">return</span> distance_matrix[first_length<span class="number">-1</span>][second_length<span class="number">-1</span>]</div></pre></td></tr></table></figure>
+<p>参考文献：</p>
+<p><a href="https://www.biaodianfu.com/edit-distance.html" target="_blank" rel="external">使用Python计算文本相似性之编辑距离</a></p>
+<p><a href="http://biansutao.iteye.com/blog/326008" target="_blank" rel="external">http://biansutao.iteye.com/blog/326008)</a></p>
+<p><a href="http://www.coli.uni-saarland.de/courses/LT1/2011/slides/Python-Levenshtein.html#Levenshtein-inverse" target="_blank" rel="external">http://www.coli.uni-saarland.de/courses/LT1/2011/slides/Python-Levenshtein.html#Levenshtein-inverse</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/python/" rel="tag">#python</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/03/28/APS地址数据整理/" rel="next" title="APS地址数据整理">
+                <i class="fa fa-chevron-left"></i> APS地址数据整理
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/04/09/小世界网络/" rel="prev" title="小世界网络">
+                小世界网络 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2017/03/31/编辑距离/"
+           data-title="编辑距离" data-url="http://yoursite.com/2017/03/31/编辑距离/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="简兮" />
+          <p class="site-author-name" itemprop="name">简兮</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">27</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">20</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#编辑距离"><span class="nav-number">1.</span> <span class="nav-text">编辑距离</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-定义"><span class="nav-number">1.1.</span> <span class="nav-text">1. 定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-python实现"><span class="nav-number">1.2.</span> <span class="nav-text">2. python实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-python-Levenshtein"><span class="nav-number">1.2.1.</span> <span class="nav-text">2.1 python-Levenshtein</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-如何用python实现编辑距离"><span class="nav-number">1.2.2.</span> <span class="nav-text">2.2 如何用python实现编辑距离</span></a></li></ol></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  Mon Oct 31 2016 08:00:00 GMT+0800 (DST) - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">简兮</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"hashc"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for (i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+  <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+  
+
+  
+
+  
+
+
+</body>
+</html>
