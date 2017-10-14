@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="python,轮盘赌," />
 
 
 
@@ -84,13 +84,18 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="Choi&#39;s Blog">
-<meta property="og:url" content="http://yoursite.com/archives/2017/10/index.html">
+<meta name="description" content="#实现轮盘赌几种方法： 在诸多的算法中，轮盘赌一般用来随机选择某个元素，其基本的算法如下：1.基本方法，    计算累计概率分布，random一个值r,从低到高，判断r的位置2.基于二分查找    对基本方法的改进，累计概率分布已经是个排好序的数列了，这个时候就可以利用二分查找来获得r的位置3.基于随机接受    flag=1    N=len(fitness)    while(flag):">
+<meta name="keywords" content="python,轮盘赌">
+<meta property="og:type" content="article">
+<meta property="og:title" content="实现轮盘赌的几种方法">
+<meta property="og:url" content="http://yoursite.com/2017/10/14/实现轮盘赌的几种方法/index.html">
 <meta property="og:site_name" content="Choi&#39;s Blog">
+<meta property="og:description" content="#实现轮盘赌几种方法： 在诸多的算法中，轮盘赌一般用来随机选择某个元素，其基本的算法如下：1.基本方法，    计算累计概率分布，random一个值r,从低到高，判断r的位置2.基于二分查找    对基本方法的改进，累计概率分布已经是个排好序的数列了，这个时候就可以利用二分查找来获得r的位置3.基于随机接受    flag=1    N=len(fitness)    while(flag):">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-10-14T02:24:37.080Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Choi&#39;s Blog">
+<meta name="twitter:title" content="实现轮盘赌的几种方法">
+<meta name="twitter:description" content="#实现轮盘赌几种方法： 在诸多的算法中，轮盘赌一般用来随机选择某个元素，其基本的算法如下：1.基本方法，    计算累计概率分布，random一个值r,从低到高，判断r的位置2.基于二分查找    对基本方法的改进，累计概率分布已经是个排好序的数列了，这个时候就可以利用二分查找来获得r的位置3.基于随机接受    flag=1    N=len(fitness)    while(flag):">
 
 
 
@@ -111,10 +116,10 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/archives/2017/10/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/10/14/实现轮盘赌的几种方法/"/>
 
 
-  <title> 归档 | Choi's Blog </title>
+  <title> 实现轮盘赌的几种方法 | Choi's Blog </title>
 </head>
 
 <body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
@@ -135,7 +140,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left  page-archive  ">
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
@@ -238,213 +243,133 @@
           <div id="content" class="content">
             
 
-  <section id="posts" class="posts-collapse">
-    <span class="archive-move-on"></span>
-
-    <span class="archive-page-counter">
-      
-      
-       
-      
-      OK! 目前共计 31 篇日志。 继续努力。
-    </span>
-
+  <div id="posts" class="posts-expand">
     
-
-      
-      
-      
-
-      
-        
-        <div class="collection-title">
-          <h2 class="archive-year motion-element" id="archive-year-2017">2017</h2>
-        </div>
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="//schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2017/10/14/实现轮盘赌的几种方法/" itemprop="url">
-              
-                <span itemprop="name">实现轮盘赌的几种方法</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-10-14T10:07:01+08:00"
-              content="2017-10-14" >
-          10-14
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-      
-      
-      
-
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="//schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2017/10/07/玻璃杯里的凉意/" itemprop="url">
-              
-                <span itemprop="name">玻璃杯里的凉意</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-10-07T15:38:57+08:00"
-              content="2017-10-07" >
-          10-07
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-      
-      
-      
-
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="//schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2017/10/05/markdown-插入iframe/" itemprop="url">
-              
-                <span itemprop="name">markdown 插入iframe</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-10-05T14:01:27+08:00"
-              content="2017-10-05" >
-          10-05
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-      
-      
-      
-
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="//schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2017/10/05/nodjs安装及npm配置/" itemprop="url">
-              
-                <span itemprop="name">nodjs安装及npm配置</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-10-05T13:45:13+08:00"
-              content="2017-10-05" >
-          10-05
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-      
-      
-      
-
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="//schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2017/10/02/hdf5使用教程/" itemprop="url">
-              
-                <span itemprop="name">hdf5使用教程</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-10-02T14:47:16+08:00"
-              content="2017-10-02" >
-          10-02
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-  </section>
 
   
+  
 
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                实现轮盘赌的几种方法
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-10-14T10:07:01+08:00" content="2017-10-14">
+              2017-10-14
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/10/14/实现轮盘赌的几种方法/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/10/14/实现轮盘赌的几种方法/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>#实现轮盘赌几种方法：</p>
+<p>在诸多的算法中，轮盘赌一般用来随机选择某个元素，其基本的算法如下：<br>1.基本方法，<br>    计算累计概率分布，random一个值r,从低到高，判断r的位置<br>2.基于二分查找<br>    对基本方法的改进，累计概率分布已经是个排好序的数列了，这个时候就可以利用二分查找来获得r的位置<br>3.基于随机接受<br>    flag=1<br>    N=len(fitness)<br>    while(flag):<br>        index=int(random()*N)<br>        if random()&lt;fitness[index]/max(fitness):<br>            flag=0<br>            return index<br>            break</p>
+<p>参考文献<br><a href="https://arxiv.org/pdf/1109.3627.pdf" target="_blank" rel="external">https://arxiv.org/pdf/1109.3627.pdf</a><br><a href="http://blog.csdn.net/armwangeric/article/details/50775206" target="_blank" rel="external">http://blog.csdn.net/armwangeric/article/details/50775206</a><br><a href="https://github.com/mangwang/PythonForFun/blob/master/rouletteWheelSelection.py" target="_blank" rel="external">https://github.com/mangwang/PythonForFun/blob/master/rouletteWheelSelection.py</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/python/" rel="tag">#python</a>
+          
+            <a href="/tags/轮盘赌/" rel="tag">#轮盘赌</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/10/07/玻璃杯里的凉意/" rel="next" title="玻璃杯里的凉意">
+                <i class="fa fa-chevron-left"></i> 玻璃杯里的凉意
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -452,6 +377,14 @@
 
 
           
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2017/10/14/实现轮盘赌的几种方法/"
+           data-title="实现轮盘赌的几种方法" data-url="http://yoursite.com/2017/10/14/实现轮盘赌的几种方法/">
+      </div>
+    
+  </div>
+
 
         </div>
         
@@ -471,8 +404,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel  sidebar-panel-active ">
+      <section class="site-overview sidebar-panel ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.png"
@@ -515,6 +457,17 @@
 
       </section>
 
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <p class="post-toc-empty">此文章未包含目录</p>
+            
+          </div>
+        </section>
       
 
     </div>
@@ -611,11 +564,9 @@
   
 
   
-  
-    <script type="text/javascript" id="motion.page.archive">
-      $('.archive-year').velocity('transition.slideLeftIn');
-    </script>
-  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
 
 
   
