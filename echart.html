@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+ 
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+<title>Document</title>
+
+<script src="https://cdn.staticfile.org/echarts/4.3.0/echarts.min.js"></script>
+
+</head>
+
+ 
+
+<body>
+
+<div id="chart1" style="width:600px;height:700px"></div>
+
+</body>
+
+<script>
+
+var a = echarts.init(document.getElementById("chart1"));
+
+ 
+
+option = {
+title: {
+text: '饼图程序调用高亮示例',
+
+x: 'center'
+
+},
+
+tooltip: {
+trigger: 'item',
+
+formatter: "{a} <br/>{b} : {c} ({d}%)"
+
+},
+
+legend: {
+orient: 'vertical',
+
+left: 'left',
+
+data: ['直接访问', '邮件营销', '联盟广告', '视频广告', '搜索引擎']
+
+},
+
+series: [
+
+{
+name: '访问来源',
+
+type: 'pie',
+
+radius: '55%',
+
+center: ['50%', '60%'],
+
+data: [
+
+{ value: 335, name: '直接访问' },
+
+{ value: 310, name: '邮件营销' },
+
+{ value: 234, name: '联盟广告' },
+
+{ value: 135, name: '视频广告' },
+
+{ value: 1548, name: '搜索引擎' }
+
+],
+
+itemStyle: {
+emphasis: {
+shadowBlur: 10,
+
+shadowOffsetX: 0,
+
+shadowColor: 'rgba(0, 0, 0, 0.5)'
+
+}
+
+}
+
+}
+
+]
+
+};
+
+ 
+
+a.setOption(option);
+
+//设置默认选中高亮部分
+
+a.dispatchAction({
+type: 'highlight',
+
+seriesIndex: 0,
+
+dataIndex: 4
+
+});
+
+</script>
+
+</html>
+————————————————
+版权声明：本文为CSDN博主「没有故事、有酒」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。
+原文链接：https://blog.csdn.net/qq_31119443/article/details/88722556
